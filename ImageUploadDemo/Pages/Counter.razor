@@ -1,0 +1,41 @@
+﻿@page "/counter"
+@inject ILogger<Counter> logger
+
+<PageTitle>Counter</PageTitle>
+
+<h1>Counter</h1>
+
+<div class="image-upload">
+    <h2>Information hero image</h2>
+    <p>This is the main image that will be associated with this page. The image needs to be of high enough quality to be used at a resolution of 988 x 350 pixels at the largest size. A landscape format will also work best. Only JPG file formats can be used.</p>
+    <InputFile OnChange="(e) => OnImageLoad(e)" id="image-upload" />
+    <button @onclick="Submit">Save</button>
+</div>
+
+@code {
+    Stream _stream = default!;
+    string _contentType = default!;
+    private int currentCount = 0;
+
+    private void Submit()
+    {
+        logger.LogInformation("Submit Happened");
+
+    }
+
+    public void OnImageLoad(InputFileChangeEventArgs e)
+    {
+        try
+        {
+            if (e.File == null)
+                return;
+
+            _stream = e.File.OpenReadStream(maxAllowedSize: 2048000);
+            _contentType = e.File.ContentType;
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "broken");
+        }
+    }
+}
