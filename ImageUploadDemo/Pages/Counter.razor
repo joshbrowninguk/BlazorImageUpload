@@ -1,4 +1,4 @@
-﻿@page "/counter"
+﻿@page "/"
 @inject ILogger<Counter> logger
 
 <PageTitle>Counter</PageTitle>
@@ -7,7 +7,7 @@
 
 <div class="image-upload">
     <h2>Information hero image</h2>
-    <p>This is the main image that will be associated with this page. The image needs to be of high enough quality to be used at a resolution of 988 x 350 pixels at the largest size. A landscape format will also work best. Only JPG file formats can be used.</p>
+    <p>Select an image in the picker, then click Save. A log message should be called on pressing save</p>
     <InputFile OnChange="(e) => OnImageLoad(e)" id="image-upload" />
     <button @onclick="Submit">Save</button>
 </div>
